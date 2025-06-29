@@ -1,0 +1,44 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+main {
+    height: 100vh;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #0d1b2a;
+    color: white;
+    height: 10%;
+    max-height: 66px;
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+}
+
+.navbar-items {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar-items li {
+    list-style-type: none;
+    transition: all 2s ease-in;
+}
+
+.navbar-items li:hover {
+    color: #778da9;
+    transform: translateY(-5px);
+    cursor: pointer;
+}
+
+/* Products */
+.products {
+    background-color: #2c3e50;
+    height: 90.5%;
+    color: white;
+}
