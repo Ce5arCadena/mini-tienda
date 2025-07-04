@@ -9,8 +9,12 @@
 <body>
     <main>
         <?php include_once "./src/components/Navbar.php"; ?>
+        <?php include_once "./src/components/FormSave.php"; ?>
 
         <?php include_once "./src/views/ListProducts.php"; ?>
     </main>
+
+    <script src="./src/assets/js/AddProduct.js"></script>
+    <script src="./src/assets/js/Navbar.js"></script>
 </body>
 </html>

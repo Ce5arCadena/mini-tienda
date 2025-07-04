@@ -4,6 +4,6 @@
     </div>
     <ul class="navbar-items">
         <li>Lista Productos</li>
-        <li>Agregar</li>
+        <li class="addProduct">Agregar</li>
     </ul>
 </nav>
