@@ -14,7 +14,7 @@
         <?php include_once "./src/views/ListProducts.php"; ?>
     </main>
 
-    <script src="./src/assets/js/AddProduct.js"></script>
-    <script src="./src/assets/js/Navbar.js"></script>
+    <script type="module" src="./src/assets/js/AddProduct.js"></script>
+    <script type="module" src="./src/assets/js/Navbar.js"></script>
 </body>
 </html>

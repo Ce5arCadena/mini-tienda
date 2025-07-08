@@ -11,6 +11,15 @@ $listProducts = json_decode($products->getProducts());
             <button class="btn btn-create">Crear Producto</button>
         </div>
     <?php else: ?>
+        <div class="productsCart">
+            <div>
+                <h3>Carrito</h3>
+            </div>
+
+            <div class="itemsCart">
+                
+            </div>
+        </div>
         <div class="productList">
             <?php foreach($listProducts->data as $product): ?>
                 <div class="card">
@@ -19,7 +28,7 @@ $listProducts = json_decode($products->getProducts());
                         <h4>Nombre: <?php echo $product->name ?></h4>
                         <h5>Precio: <?php echo $product->price ?></h5>
                         <span>En stock: <?php echo $product->stock ?></span>
-                        <button class="btn">Agregar🛒</button>
+                        <button class="btn btnAddProductToCart" data-id="<?php echo $product->id ?>">Agregar🛒</button>
                     </div>
                 </div>
             <?php endforeach; ?>

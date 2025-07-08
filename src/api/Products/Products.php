@@ -26,6 +26,24 @@
             }
         }
 
+        public function getProduct($id) {
+            try {
+                $query = "SELECT * FROM ".$this->table." WHERE id=:id";
+                $queryPrepare = $this->conn->prepare($query);
+                $queryPrepare->bindParam(':id', $id, PDO::PARAM_INT);
+                $queryPrepare->execute();
+                $product = $queryPrepare->fetch(PDO::FETCH_ASSOC);
+                if ($product) {
+                    return json_encode(["data" => $product, 'message' => 'Producto listado.', 'success' => true]);
+                }
+                
+                return json_encode(["message" => "No hay productos para mostrar", "success" => true, "data" => []]);
+            } catch (PDOException $e) {
+                print "Error al consultar los productos" . $e->getMessage();
+                return json_encode(["errors" => ["No se pudo consultar los productos"]]);
+            }
+        }
+
         public function saveProduct($product) {
             try {
                 $query = "INSERT INTO ". $this->table . " (name, price, stock, image) values (:name, :price, :stock, :image)";

@@ -1,9 +1,40 @@
+import { getProduct } from './functions.js';
+
 document.addEventListener('DOMContentLoaded', () => {
+    const cart = document.querySelector('.productsQuantity');
     const productListContainer = document.querySelector('.productList');
     const btnCloseModalCreateProduct = document.querySelector('.icon-close');
     const modalCreateProduct = document.querySelector('.container-create-product');
+    const btnAddProductToCart = document.querySelectorAll('.btnAddProductToCart');
 
     const form = document.querySelector('.form-create');
+
+    btnAddProductToCart.forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+            const id = e.target.dataset.id;
+            if (!id) return;
+            const productData = await getProduct(id);
+            console.log(productData);
+            if (productData) {
+                console.log(cart.textContent, !cart.textContent);
+                if (!cart.textContent) {
+                    cart.textContent = 1;
+                    localStorage.setItem('products', JSON.stringify([productData]));
+                } else {
+                    // Ingresar al localstorage la data de los productos, y al darle click, mostrar los productos
+                    const dataStorage = JSON.parse(localStorage.getItem('products'));
+                    console.log(dataStorage);
+                    const productExistInStorage = dataStorage.find(product => product.id === productData.id);
+                    if (!productExistInStorage) {
+                        localStorage.setItem('products', JSON.stringify([...dataStorage, productData]));
+                        let quantity = Number(cart.textContent);
+                        cart.textContent = quantity + 1;
+                    }
+                }
+            };
+        });
+    });
+    
 
     btnCloseModalCreateProduct.addEventListener('click', () => {
         modalCreateProduct.classList.toggle('d-none');

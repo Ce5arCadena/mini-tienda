@@ -6,4 +6,8 @@
         <li>Lista Productos</li>
         <li class="addProduct">Agregar</li>
     </ul>
+    <div class="navbar-cart">
+        <img src="./src/assets/icons/cart.svg" alt="Icon Product">
+        <span class="productsQuantity"></span>
+    </div>
 </nav>
