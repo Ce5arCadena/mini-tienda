@@ -1,21 +1,35 @@
 document.addEventListener('DOMContentLoaded', () => {
     const cart = document.querySelector('.navbar-cart');
+    const productsCart = document.querySelector('.productsCart');
+    const cartQuantity = document.querySelector('.productsQuantity');
+    const iconCloseCart = document.querySelector('.icon-close-cart');
     const btnShowModalCreateProduct = document.querySelector('.addProduct');
     const modalCreateProduct = document.querySelector('.container-create-product');
+
+    const dataStorage = JSON.parse(localStorage.getItem('products')) || [];
+    if (dataStorage.length > 0 ) {
+        cartQuantity.textContent = dataStorage.length;
+    };
 
     btnShowModalCreateProduct.addEventListener('click', () => {
         modalCreateProduct.classList.toggle('d-none');
     });
 
+    iconCloseCart.addEventListener('click', () => {
+        productsCart.style.display = 'none';
+        const itemsCart = document.querySelectorAll('.itemCart');
+        if (itemsCart.length > 0) {
+            itemsCart.forEach(item => item.remove());
+        };
+    });
+
     cart.addEventListener('click', () => {
-        console.log('cliccck');
+        // console.log('cliccck');
         const productsStorage = JSON.parse(localStorage.getItem('products')) || [];
         console.log(productsStorage);
         if (productsStorage.length <= 0) return;
-
-        const productsCart = document.querySelector('.productsCart');
+        
         productsCart.style.display = "flex";
-        // productsCart.style.flexDirection = "column";
 
         // Se arma el contenedor de cada producto para el carrito: img, nombre, precio y botones de + y -
         productsStorage.forEach(product => {
@@ -64,6 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // contenedor para botones
         const divButtons = document.createElement('div');
+        divButtons.classList.add('d-flex');
 
         // botones de agregar más o menos cantidad
         const addButton = document.createElement('button');
@@ -90,8 +105,36 @@ document.addEventListener('DOMContentLoaded', () => {
             newQuantity.textContent = Number(newQuantity.textContent) - 1;
         });
 
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = "Eliminar";
+        deleteButton.classList.add('btn');
+
+        // TODO:Agregar boton de eliminar producto del carrito. Seria ir al localstorage y borrarlo de ahí, para actualizar el aside
+        deleteButton.addEventListener('click', () => {
+            removeItemProductToStorage(id, div);
+        });
+
         divButtons.appendChild(substractButton);
         div.appendChild(divButtons);
+        div.appendChild(deleteButton);
+
         return div;
+    };
+
+    const removeItemProductToStorage = (id, div) => {
+        console.log(id, div);
+        if (!id || !div) return;
+
+        const productsStorage = JSON.parse(localStorage.getItem('products'));
+        const existProductInStorage = productsStorage.find(product => product.id === id);
+        console.log(productsStorage, existProductInStorage);
+        if (!existProductInStorage) return;
+
+        const newProducts = productsStorage.filter(product => product.id !== id);
+        localStorage.setItem('products', JSON.stringify(newProducts));
+        div.remove();
+
+        const quantityCart = Number(cartQuantity.textContent);
+        cartQuantity.textContent = quantityCart - 1;
     };
 });

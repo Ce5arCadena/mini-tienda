@@ -12,6 +12,7 @@ $listProducts = json_decode($products->getProducts());
         </div>
     <?php else: ?>
         <div class="productsCart">
+            <img src="./src/assets/icons/close.svg" alt="Icon Product" class="icon icon-close-cart">
             <div>
                 <h3>Carrito</h3>
             </div>

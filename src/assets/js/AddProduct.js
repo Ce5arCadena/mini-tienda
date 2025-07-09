@@ -16,14 +16,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const productData = await getProduct(id);
             console.log(productData);
             if (productData) {
-                console.log(cart.textContent, !cart.textContent);
+                // console.log(cart.textContent, !cart.textContent);
                 if (!cart.textContent) {
                     cart.textContent = 1;
                     localStorage.setItem('products', JSON.stringify([productData]));
                 } else {
                     // Ingresar al localstorage la data de los productos, y al darle click, mostrar los productos
                     const dataStorage = JSON.parse(localStorage.getItem('products'));
-                    console.log(dataStorage);
+                    // console.log(dataStorage);
                     const productExistInStorage = dataStorage.find(product => product.id === productData.id);
                     if (!productExistInStorage) {
                         localStorage.setItem('products', JSON.stringify([...dataStorage, productData]));
